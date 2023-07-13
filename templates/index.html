@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Приложение Notes{% endblock %}
+{% block link %}<link rel="stylesheet" type="text/css" href="static/css/index.css">{% endblock %}
+
+{% block content %}
+
+
+<main>
+
+    <form id='data' action="/" method="post">
+        <div class="wrapper">
+            <div class="data title-data">
+                <input class="data title-data-color" type="text" name="title" placeholder="Заголовка" required></div>
+            <div class="data content-data">
+                <textarea rows="5"
+  cols="30" class="data content-data-color" type="text" name="content" placeholder="Текст" ></textarea></div>
+            <div class="data" >
+            <button class="data button-data button-data-color" type="submit">Записать</button></div>
+        </div>
+    </form>
+
+    <h1 class="title">Заметки</h1>
+    <div class="table-wrap">
+        {% for i in data %}
+            <div id="container" class="post-wrapper ">
+                <div class="table-title">
+                    {{ i.title }}
+                </div>
+                <div id="text" class="table-content collapsed">
+                    {{ i.content }}
+                </div>
+                <button class="toggleButton" id="toggleButton" onclick="toggleText()">Развернуть текст</button>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+
+<script>
+
+function toggleText() {
+  var textElement = document.getElementById("text");
+  var buttonElement = document.getElementById("toggleButton");
+
+  if (textElement.classList.contains("collapsed")) {
+    textElement.classList.remove("collapsed");
+    textElement.classList.add("expanded");
+    buttonElement.textContent = "Свернуть текст";
+  } else {
+    textElement.classList.remove("expanded");
+    textElement.classList.add("collapsed");
+    buttonElement.textContent = "Развернуть текст";
+  }
+}
+
+window.onload = function() {
+  var textElement = document.getElementById("text");
+  var buttonElement = document.getElementById("toggleButton");
+
+  if (textElement.offsetHeight < textElement.scrollHeight) {
+    buttonElement.style.display = "block";
+  }
+}
+
+</script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--      <meta charset="UTF-8">-->
+<!--      <link rel="stylesheet" href="../static/css/style.css">-->
+<!--  <title>Note - Главная страница</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--  <h1>Добро пожаловать в Notes!</h1>-->
+
+<!--  <h2>Ваши заметки:</h2>-->
+<!--  <ul>-->
+<!--    <li>Заметка 1</li>-->
+<!--    <li>Заметка 2</li>-->
+<!--    <li>Заметка 3</li>-->
+<!--  </ul>-->
+
+<!--  <h2>Создать новую заметку:</h2>-->
+<!--  <form action="/create" method="post">-->
+<!--    <label for="note">Текст заметки:</label>-->
+<!--    <textarea id="note" name="note" required></textarea><br>-->
+
+<!--    <input type="submit" value="Создать">-->
+<!--  </form>-->
+
+<!--  <h2>Выйти из аккаунта:</h2>-->
+<!--  <form action="/logout" method="post">-->
+<!--    <input type="submit" value="Выйти">-->
+<!--  </form>-->
+<!--</body>-->
+<!--</html>-->
+
+
